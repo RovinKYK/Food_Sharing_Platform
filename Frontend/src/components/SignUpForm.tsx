@@ -1,5 +1,7 @@
+import { AccountType } from "../constants/types";
+
 interface Props {
-  accountType: string;
+  accountType: AccountType;
 }
 
 const SignUpForm = ({ accountType }: Props) => {
