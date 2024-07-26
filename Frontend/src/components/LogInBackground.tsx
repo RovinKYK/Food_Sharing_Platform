@@ -10,18 +10,19 @@ const LogInBackground = ({ children }: Props) => {
   return (
     <Box
       sx={{
-        height: "100vh",
+        height: screen.height - 122,
         width: "100vw",
         display: "flex",
         backgroundImage: `url(${image})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         justifyContent: "center",
+        backgroundAttachment: "fixed",
       }}
     >
       <Box
         sx={{
-          height: "100vh",
+          height: screen.height - 122,
           width: "100vw",
           backgroundColor: "rgba(0, 0, 0, 0.53)",
           position: "absolute",

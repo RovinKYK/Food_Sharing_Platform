@@ -1,22 +1,25 @@
 import { Typography } from "@mui/material";
 
-interface Props {
+interface StyleProps {
   fontSize: string;
   left: string;
   top: string;
 }
+interface Props {
+  styles: StyleProps;
+}
 
-const Logo = ({ fontSize, left, top }: Props) => {
+const Logo = ({ styles }: Props) => {
   return (
     <Typography
       variant="h1"
       sx={{
         position: "absolute",
-        top: top,
-        left: left,
+        top: styles.top,
+        left: styles.left,
         fontFamily: "playwrite-no, latin",
         fontWeight: 700,
-        fontSize: fontSize,
+        fontSize: styles.fontSize,
         color: "#1CB31C",
         WebkitTextStroke: "2px black",
       }}

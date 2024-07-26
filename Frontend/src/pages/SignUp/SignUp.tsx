@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { AccountType } from "../constants/types";
-import LogInBackground from "../components/LogInBackground";
-import SignUpMethodBox from "../components/SignUpMethodBox";
-import SignUpForm from "../components/SignUpForm";
+import { AccountType } from "../../constants/types";
+import LogInBackground from "../../components/LogInBackground";
+import SignUpMethodBox from "./components/SignUpMethodBox";
+import SignUpForm from "./components/SignUpForm";
+import getStyles from "./styles";
 
 const SignUpPage = () => {
+  const styles = getStyles();
   const [accountType, setAccountType] = useState<AccountType | "">("");
 
   const handlePersonalAccClick = () => setAccountType("Personal");
@@ -18,6 +20,7 @@ const SignUpPage = () => {
           oNPersonalAccClick={handlePersonalAccClick}
           oNShopAccClick={handleShopAccClick}
           oNOrgAccClick={handleOrgAccClick}
+          styles={styles.SignUpMethodBox}
         />
       ) : (
         <SignUpForm accountType={accountType} />

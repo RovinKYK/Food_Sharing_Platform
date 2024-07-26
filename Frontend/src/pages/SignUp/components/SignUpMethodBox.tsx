@@ -1,27 +1,34 @@
 import { Box, Button, Link, Typography } from "@mui/material";
 
+interface StyleProps {
+  height: string;
+  width: string;
+  top: string;
+}
 interface Props {
   oNPersonalAccClick: () => void;
   oNShopAccClick: () => void;
   oNOrgAccClick: () => void;
+  styles: StyleProps;
 }
 
 const SignUpMethodBox = ({
   oNPersonalAccClick,
   oNShopAccClick,
   oNOrgAccClick,
+  styles,
 }: Props) => {
   return (
     <Box
       sx={{
-        height: "54vh",
-        width: "40vw",
+        height: styles.height,
+        width: styles.width,
         display: "flex",
         backgroundColor: "#FFFFFF",
         borderRadius: "30px",
         position: "absolute",
         justifyContent: "center",
-        top: "15vh",
+        top: styles.top,
       }}
     >
       <Button

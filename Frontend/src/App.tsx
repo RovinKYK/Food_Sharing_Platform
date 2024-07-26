@@ -1,6 +1,6 @@
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
-import LogInPage from "./pages/LogIn";
-import SignUpPage from "./pages/SignUp";
+import LogInPage from "./pages/LogIn/LogIn";
+import SignUpPage from "./pages/SignUp/SignUp";
 import NoPage from "./pages/NoPage";
 
 const App = () => {

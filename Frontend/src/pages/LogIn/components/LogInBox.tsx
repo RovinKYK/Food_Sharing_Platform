@@ -1,14 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import { Box, Typography, TextField, Button } from "@mui/material";
 
-interface Props {
+interface StyleProps {
   height: string;
   width: string;
   top: string;
-  left: string;
+  right: string;
+}
+interface Props {
+  styles: StyleProps;
 }
 
-const LogInBox = ({ height, width, top, left }: Props) => {
+const LogInBox = ({ styles }: Props) => {
   const navigate = useNavigate();
 
   const handleCreateAccClick = () => {
@@ -18,15 +21,15 @@ const LogInBox = ({ height, width, top, left }: Props) => {
   return (
     <Box
       sx={{
-        height: height,
-        width: width,
+        height: styles.height,
+        width: styles.width,
         display: "flex",
         backgroundColor: "#FFFFFF",
         borderRadius: "16px",
         position: "absolute",
         justifyContent: "center",
-        top: top,
-        left: left,
+        top: styles.top,
+        right: styles.right,
         zIndex: 1,
       }}
     >
@@ -36,7 +39,7 @@ const LogInBox = ({ height, width, top, left }: Props) => {
           position: "absolute",
           top: "7.5%",
           fontWeight: 700,
-          fontSize: "4vh",
+          fontSize: "175%",
           color: "#000000",
         }}
       >
@@ -46,9 +49,10 @@ const LogInBox = ({ height, width, top, left }: Props) => {
       <TextField
         label="Your Email"
         variant="standard"
+        autoComplete="off"
         sx={{
           position: "absolute",
-          top: 120,
+          top: "26%",
           left: "8%",
           width: "80%",
         }}
@@ -58,9 +62,10 @@ const LogInBox = ({ height, width, top, left }: Props) => {
         label="Password"
         variant="standard"
         type="password"
+        autoComplete="off"
         sx={{
           position: "absolute",
-          top: 185,
+          top: "40%",
           left: "8%",
           width: "80%",
         }}
@@ -70,8 +75,7 @@ const LogInBox = ({ height, width, top, left }: Props) => {
         variant="contained"
         sx={{
           position: "absolute",
-          top: 265,
-
+          top: "56%",
           width: "45%",
         }}
       >
@@ -82,9 +86,8 @@ const LogInBox = ({ height, width, top, left }: Props) => {
         variant="h6"
         sx={{
           position: "absolute",
-          top: 350,
-
-          fontSize: "1.2rem",
+          top: "77%",
+          fontSize: "110%",
           color: "#000000",
         }}
       >
@@ -95,8 +98,7 @@ const LogInBox = ({ height, width, top, left }: Props) => {
         variant="contained"
         sx={{
           position: "absolute",
-          top: 389,
-          left: "%",
+          top: "84%",
           width: "57%",
         }}
         onClick={handleCreateAccClick}
