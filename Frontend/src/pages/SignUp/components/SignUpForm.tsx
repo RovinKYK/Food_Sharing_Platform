@@ -13,9 +13,10 @@ import { useNavigate } from "react-router-dom";
 
 interface Props {
   accountType: AccountType;
+  onBackClick: () => void;
 }
 
-const SignUpForm = ({ accountType }: Props) => {
+const SignUpForm = ({ accountType, onBackClick}: Props) => {
   const navigate = useNavigate();
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -26,7 +27,7 @@ const SignUpForm = ({ accountType }: Props) => {
       formDataObject[key] = value.toString();
     });
     console.log(formDataObject);
-    navigate({ to: "/login" });
+    navigate("/login")
   };
 
   return (
@@ -60,6 +61,7 @@ const SignUpForm = ({ accountType }: Props) => {
             left: "-44%",
             position: "relative",
           }}
+          onClick = {onBackClick}
         >
           Back
         </Button>
@@ -74,7 +76,7 @@ const SignUpForm = ({ accountType }: Props) => {
           sx={{ mt: 3 }}
         >
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            {(accountType==="Personal")&&<><Grid item xs={12} sm={5.5}>
               <TextField
                 name="firstName"
                 required
@@ -83,13 +85,23 @@ const SignUpForm = ({ accountType }: Props) => {
                 variant="standard"
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={0} sm={1}/>
+            <Grid item xs={12} sm={5.5}>
               <TextField
                 required
                 fullWidth
                 label="Last Name"
                 name="lastName"
                 autoComplete="family-name"
+                variant="standard"
+              />
+            </Grid></>}
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                required
+                label={accountType+" Name"}
+                name="name"
                 variant="standard"
               />
             </Grid>

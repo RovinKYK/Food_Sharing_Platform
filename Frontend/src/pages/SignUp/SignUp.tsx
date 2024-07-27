@@ -13,6 +13,8 @@ const SignUpPage = () => {
   const handleShopAccClick = () => setAccountType("Shop");
   const handleOrgAccClick = () => setAccountType("Organization");
 
+  const handleFormBackClick = () => setAccountType("");
+
   return (
     <LogInBackground>
       {!accountType ? (
@@ -23,10 +25,10 @@ const SignUpPage = () => {
           styles={styles.SignUpMethodBox}
         />
       ) : (
-        <SignUpForm accountType={accountType} />
+        <SignUpForm accountType={accountType} onBackClick = {handleFormBackClick} />
       )}
     </LogInBackground>
   );
 };
 
-export default SignUpPage;
+export default SignUpPage
