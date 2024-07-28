@@ -2,32 +2,42 @@ import { AccountType } from "../../../constants/types";
 import {
   Container,
   Grid,
-  TextField,
   Button,
   Typography,
   Box,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import FormReqField from "../../../components/FormReqField";
 import { FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
 
 interface Props {
   accountType: AccountType;
   onBackClick: () => void;
+  onFormSubmit: (event: FormEvent<HTMLFormElement>) => void;
 }
 
-const SignUpForm = ({ accountType, onBackClick}: Props) => {
-  const navigate = useNavigate();
+const SignUpForm = ({ accountType, onBackClick, onFormSubmit }: Props) => {
+  const theme = useTheme();
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const formDataObject: { [key: string]: string } = {};
-    formData.forEach((value, key) => {
-      formDataObject[key] = value.toString();
-    });
-    console.log(formDataObject);
-    navigate("/login")
+  const widthLarge = useMediaQuery(theme.breakpoints.up("sm"));
+
+  const validatePasswordMatch = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const input = e.target as HTMLInputElement;
+    const passwordInput = input
+      .closest("form")
+      ?.querySelector('input[name="password"]') as HTMLInputElement;
+    console.log(passwordInput.value);
+    if (passwordInput) {
+      if (input.value !== passwordInput.value) {
+        input.setCustomValidity("Passwords do not match");
+      } else {
+        input.setCustomValidity("");
+      }
+    }
   };
 
   return (
@@ -61,7 +71,7 @@ const SignUpForm = ({ accountType, onBackClick}: Props) => {
             left: "-44%",
             position: "relative",
           }}
-          onClick = {onBackClick}
+          onClick={onBackClick}
         >
           Back
         </Button>
@@ -71,86 +81,45 @@ const SignUpForm = ({ accountType, onBackClick}: Props) => {
         <Box
           component="form"
           autoComplete="off"
-          noValidate
-          onSubmit={handleSubmit}
+          onSubmit={onFormSubmit}
           sx={{ mt: 3 }}
         >
           <Grid container spacing={2}>
-            {(accountType==="Personal")&&<><Grid item xs={12} sm={5.5}>
-              <TextField
-                name="firstName"
-                required
-                fullWidth
-                label="First Name"
-                variant="standard"
-              />
-            </Grid>
-            <Grid item xs={0} sm={1}/>
-            <Grid item xs={12} sm={5.5}>
-              <TextField
-                required
-                fullWidth
-                label="Last Name"
-                name="lastName"
-                autoComplete="family-name"
-                variant="standard"
-              />
-            </Grid></>}
+            {accountType === "Personal" ? (
+              <>
+                <Grid item xs={12} sm={5.5}>
+                  <FormReqField name="firstName" label="First Name" />
+                </Grid>
+                {widthLarge && <Grid item xs={0} sm={1} />}
+                <Grid item xs={12} sm={5.5}>
+                  <FormReqField label="Last Name" name="lastName" />
+                </Grid>
+              </>
+            ) : (
+              <Grid item xs={12}>
+                <FormReqField label={accountType + " Name"} name="name" />
+              </Grid>
+            )}
             <Grid item xs={12}>
-              <TextField
-                fullWidth
-                required
-                label={accountType+" Name"}
-                name="name"
-                variant="standard"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                required
-                label="Email Address"
-                name="email"
-                variant="standard"
-              />
+              <FormReqField label="Email Address" name="email" />
             </Grid>
             <Grid item xs={12} mt="30px">
-              <TextField
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                variant="standard"
-              />
+              <FormReqField name="password" label="Password" type="password" />
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
+              <FormReqField
                 name="confirmPassword"
                 label="Confirm Password"
                 type="password"
-                variant="standard"
+                onChange={validatePasswordMatch}
+                invalidMsg="Passwords do not match"
               />
             </Grid>
             <Grid item xs={12} mt="30px">
-              <TextField
-                required
-                fullWidth
-                label="Address"
-                name="address"
-                variant="standard"
-              />
+              <FormReqField label="Address" name="address" />
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                label="Phone Number"
-                name="phoneNumber"
-                variant="standard"
-              />
+              <FormReqField label="Phone Number" name="phoneNumber" />
             </Grid>
           </Grid>
           <Button

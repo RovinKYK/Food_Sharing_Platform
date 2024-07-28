@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { Box, Typography, TextField, Button } from "@mui/material";
+import { Box, Typography, Button, Grid } from "@mui/material";
+import { FormEvent } from "react";
+import FormReqField from "../../../components/FormReqField";
 
 interface StyleProps {
   height: string;
@@ -18,6 +20,17 @@ const LogInBox = ({ styles }: Props) => {
     navigate("/signup");
   };
 
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const formDataObject: { [key: string]: string } = {};
+    formData.forEach((value, key) => {
+      formDataObject[key] = value.toString();
+    });
+    console.log(formDataObject);
+    navigate("/search");
+  };
+
   return (
     <Box
       sx={{
@@ -32,6 +45,9 @@ const LogInBox = ({ styles }: Props) => {
         right: styles.right,
         zIndex: 1,
       }}
+      component="form"
+      autoComplete="off"
+      onSubmit={handleSubmit}
     >
       <Typography
         variant="h3"
@@ -45,32 +61,25 @@ const LogInBox = ({ styles }: Props) => {
       >
         Sign in to your account
       </Typography>
-
-      <TextField
-        label="Your Email"
-        variant="standard"
-        autoComplete="off"
+      <Grid
+        container
+        spacing={2}
         sx={{
+          height: "100px",
+          width: "86%",
+          display: "flex",
           position: "absolute",
-          top: "26%",
-          left: "8%",
-          width: "80%",
+          top: "24%",
+          left: "7%",
         }}
-      />
-
-      <TextField
-        label="Password"
-        variant="standard"
-        type="password"
-        autoComplete="off"
-        sx={{
-          position: "absolute",
-          top: "40%",
-          left: "8%",
-          width: "80%",
-        }}
-      />
-
+      >
+        <Grid item xs={12}>
+          <FormReqField label="Your Email" name="email" />
+        </Grid>
+        <Grid item xs={12}>
+          <FormReqField label="Password" type="password" name="password" />
+        </Grid>
+      </Grid>
       <Button
         variant="contained"
         sx={{
@@ -78,6 +87,7 @@ const LogInBox = ({ styles }: Props) => {
           top: "56%",
           width: "45%",
         }}
+        type="submit"
       >
         Sign in
       </Button>
