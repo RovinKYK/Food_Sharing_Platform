@@ -14,32 +14,25 @@ const RegisterSuccessBox = () => {
         zIndex: 1,
         backgroundColor: "white",
         marginTop: "120px",
-        justifyContent: "center",
+        alignItems: "center",
         display: "flex",
+        flexDirection: "column",
         height: "260px",
         borderRadius: "30px",
       }}
     >
-      <CheckCircleIcon color="success" sx={{ fontSize: "80px", mt: "5%" }} />
+      <CheckCircleIcon color="success" sx={{ fontSize: "80px", mt: "8%" }} />
       <Typography
         variant="h6"
         sx={{
-          position: "absolute",
-          top: "32%",
           fontSize: "130%",
           color: "#000000",
+          mt: "4%",
         }}
       >
         Account Registered Successfully!
       </Typography>
-      <Button
-        variant="contained"
-        sx={{
-          position: "absolute",
-          top: "41%",
-        }}
-        onClick={handleReturnClick}
-      >
+      <Button variant="contained" sx={{ mt: "5%" }} onClick={handleReturnClick}>
         Return to Login Page
       </Button>
     </Container>
